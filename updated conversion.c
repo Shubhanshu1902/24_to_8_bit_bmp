@@ -13,11 +13,19 @@ struct Image{
         int width;
         struct pixel_data** arr;      //arr is a 2D array where its each element is of type struct pixel_data
     };
+struct new_pixel_data{
+      UC grey;
+    };
 int main()
 {
    
     struct image pic=read Image(fp,height,width);
-    RGBtograyscale(pic);       
+    RGBtograyscale(pic);  
+    for(i=0;i<pic.height;i++)
+    {
+        for(j=0;j<pic.width;j++) 
+            arr2[i][j].grey=grayscale(pic.arr[i][j])
+    }
     return 0;
 }
 struct Image readImage(FILE *fp, int height, int width){
