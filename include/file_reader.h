@@ -42,4 +42,5 @@ void readimage(FILE *fp, int height, int width,struct image pic[height][width]);
 //void freedata(struct image pic,int height,int width);
 struct BIT_MapHeader bitmapheader(FILE *fp);
 struct DIB_Header dibheader(FILE *fp);
+int open(const char *argv);
 //void read();

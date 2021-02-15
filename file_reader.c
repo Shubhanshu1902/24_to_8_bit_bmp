@@ -22,12 +22,10 @@ void readimage(FILE *fp, int height, int width,struct image pic[height][width]) 
     fread(pic, sizeof(struct image), height * width, fp);
 }
 
-
-
-int main()
+int open(const char *argv)
 {
-    FILE *fp=fopen("try.bmp","rb");
-    FILE *fnew=fopen("tt.bmp","wb");
+    FILE *fp=fopen(argv,"rb");
+    /*FILE *fnew=fopen("tt.bmp","wb");
     struct BIT_MapHeader new_bmap =bitmapheader(fp);
     printf("%c%c\n%d\n%d\n%d",new_bmap.name[0],new_bmap.name[1],new_bmap.size,new_bmap.garbage,new_bmap.offset);
     fwrite(&new_bmap,sizeof(struct BIT_MapHeader),1,fnew);
@@ -37,7 +35,7 @@ int main()
     struct image pic[dib_new.height][dib_new.width];
     readimage(fp,dib_new.height,dib_new.width,pic);
     fwrite(pic,sizeof(struct pixelarray),dib_new.height*dib_new.width,fnew);
+    fclose(fnew);*/
     fclose(fp);
-    fclose(fnew);
     return 0;
 }
