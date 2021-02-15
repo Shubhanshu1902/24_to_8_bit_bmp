@@ -4,8 +4,8 @@
 struct BIT_MapHeader
 {
     char name[2]; //Name
-    int size;
-    int garbage;
+    unsigned int size;
+    unsigned int garbage;
     unsigned int offset;
 } __attribute__((packed));
 
@@ -20,8 +20,8 @@ struct DIB_Header
     unsigned int image_size;
     unsigned int horizontal_resolution;
     unsigned int vertical_resolution;
-    int no_of_colors;
-    int no_of_imp_colors;
+    unsigned int no_of_colors;
+    unsigned int no_of_imp_colors;
 } __attribute__((packed));
 
 struct pixelarray
@@ -33,8 +33,8 @@ struct pixelarray
 
 struct image
 {
-    int height;
-    int width;
+    unsigned int height;
+    unsigned int width;
     struct pixelarray **rgb;
 };
 
