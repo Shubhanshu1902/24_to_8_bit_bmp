@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "writer.h"
 #include "converter.h"
+#include "reader.h"
 
 int main()
 {
