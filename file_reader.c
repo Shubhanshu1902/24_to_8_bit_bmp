@@ -1,47 +1,41 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "include/file_reader.h"
 
-struct header
+
+struct BIT_MapHeader bitmapheader(FILE *fp)                          //to read bitmapheader of bmp
 {
-    char id[2];
-    int file_size, reserved, data_offset;
-} __attribute__((packed));
+    struct BIT_MapHeader header;
+    fread(&header, sizeof(struct BIT_MapHeader), 1, fp);
+    return header;
+}
 
-struct info_header
+struct DIB_Header dibheader(FILE *fp)                                //to read dibheader of bmp
 {
-    int size, width, height;
-    short planes, bits_per_pixel;
-    int compression, image_size, x_pp_m, y_pp_m, colors_used, important_colors;
-};
+    struct DIB_Header dib_header;
+    fread(&dib_header, sizeof(struct DIB_Header), 1, fp);
+    return dib_header;
+}
 
-struct pixel_data
+void readimage(FILE *fp, int height, int width,struct image pic[height][width])                //to calculate rgb date
+{  
+    fread(pic, sizeof(struct image), height * width, fp);
+}
+
+int open(const char *argv)
 {
-    char red, blue, green;
-};
-
-void logh(struct header *h);
-void logih(struct info_header *ih);
-
-int init()
-{
-    struct header h;
-    struct info_header ih;
-    FILE *bmp_24 = NULL;
-
-    bmp_24 = fopen("bmp_24.bmp", "rb");
-    printf("%lu\n", sizeof(h));
-    fread(&h, sizeof(h), 1, bmp_24);
-    fread(&ih, sizeof(struct info_header), 1, bmp_24);
-    logh(&h);
-    logih(&ih);
+    FILE *fp=fopen(argv,"rb");
+    /*FILE *fnew=fopen("tt.bmp","wb");
+    struct BIT_MapHeader new_bmap =bitmapheader(fp);
+    printf("%c%c\n%d\n%d\n%d",new_bmap.name[0],new_bmap.name[1],new_bmap.size,new_bmap.garbage,new_bmap.offset);
+    fwrite(&new_bmap,sizeof(struct BIT_MapHeader),1,fnew);
+    struct DIB_Header dib_new=dibheader(fp);
+    fwrite(&dib_new,sizeof(struct DIB_Header),1,fnew);
+    fseek(fp,new_bmap.offset,SEEK_SET); 
+    struct image pic[dib_new.height][dib_new.width];
+    readimage(fp,dib_new.height,dib_new.width,pic);
+    fwrite(pic,sizeof(struct pixelarray),dib_new.height*dib_new.width,fnew);
+    fclose(fnew);*/
+    fclose(fp);
     return 0;
-}
-
-void logh(struct header *h)
-{
-    printf("%c%c %d %d %d\n", (*h).id[0], (*h).id[1], (*h).file_size, (*h).reserved, (*h).data_offset);
-}
-
-void logih(struct info_header *ih)
-{
-    printf("%d %d %d %d %d %d %d %d %d %d %d\n", (*ih).size, (*ih).width, (*ih).height, (*ih).planes, (*ih).bits_per_pixel, (*ih).compression, (*ih).image_size, (*ih).x_pp_m, (*ih).y_pp_m, (*ih).colors_used, (*ih).important_colors);
 }

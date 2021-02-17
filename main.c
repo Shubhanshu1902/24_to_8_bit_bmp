@@ -1,5 +1,7 @@
-#include "file_reader.h"
+/*Author:-Shubhanshu Agrawal*/
+#include <stdio.h>
+#include "bmp.h"
 int main()
 {
-    init();
+	read();
 }
