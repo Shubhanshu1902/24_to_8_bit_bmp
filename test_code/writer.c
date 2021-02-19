@@ -27,13 +27,16 @@ void write_ct(FILE *img_ptr, struct color_table *ct)
 	fseek(img_ptr, 0, SEEK_SET);
 }
 
+void print(struct header h, struct info_header ih);
+
 void write_file(const char* target_name, struct header h, struct info_header ih, struct greyscale **image, struct color_table *ct)
 {
 	FILE *img_ptr = NULL;
 	img_ptr = fopen(target_name, "wb");
-
+	print(h,ih);
 	write_header(img_ptr, &h, &ih);
 	write_imagedata(img_ptr, ih.height, ih.width, image, &h);
 	write_ct(img_ptr, ct);
+	fclose(img_ptr);
 }
 
