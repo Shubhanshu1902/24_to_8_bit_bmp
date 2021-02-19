@@ -19,7 +19,7 @@ struct new_pixel_data{
 int main()
 {
    
-    struct image pic=read Image(fp,height,width);
+    struct image pic=readImage(fp,height,width);
     RGBtograyscale(pic);  
     for(i=0;i<pic.height;i++)
     {
