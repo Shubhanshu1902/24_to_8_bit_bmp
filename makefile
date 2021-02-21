@@ -1,6 +1,7 @@
 CC=gcc
-read: main.c file_reader.c conversion.c file_writer.c
-		$(CC) -o main main.c file_reader.c conversion.c file_writer.c
+all_sources=main.c file_reader.c conversion.c file_writer.c
+my_project: $(all_sources)
+		$(CC) -o my_project $(all_sources) -lm
 
 clean:
-	rm main tt.bmp result.bmp
+	rm my_project tt.bmp result.bmp
