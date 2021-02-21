@@ -1,2 +1,6 @@
-program: main.c file_reader.c
-		gcc -o program main.c file_reader.c 
+CC=gcc
+read: main.c file_reader.c conversion.c file_writer.c
+		$(CC) -o main main.c file_reader.c conversion.c 
+
+clean:
+	rm main

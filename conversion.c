@@ -1,50 +1,52 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include "function.h"
 
-typedef unsigned int UI;
-typedef unsigned char UC;
-int main()
+// struct image_data convert(header *h, info_header *ih, rgb **image)
+// {
+// 	unsigned int size = sizeof(header) + sizeof(info_header) + 256 * sizeof(color_table) + ih->width * ih->height * sizeof(greyscale);
+// 	unsigned int data_offset = size - (ih->width * ih->height * sizeof(greyscale));
+// 	convert_data(h, size, data_offset,ih);
+// 	image_data id = {converted, ct};
+// 	return id;
+// }
+
+void convert_data(header *h,info_header *ih)
 {
-    struct RGB {
-        UC blue;
-        UC green;
-        UC red;
-    };
+    unsigned int size = sizeof(header) + sizeof(info_header) + 256 * sizeof(color_table) + ih->width * ih->height * sizeof(greyscale);
+	unsigned int data_offset = size - (ih->width * ih->height * sizeof(greyscale));
+	h->file_size = size;
+	h->data_offset = data_offset;
+    ih->bpp = 8;
+	ih->colors_used = 256;
+}
 
-    struct Image {
-        int height;
-        int width;
-        struct RGB** rgb;
-    };
+unsigned char convert(rgb pic)
+{
+        return(pic.r*0.299 + pic.g*0.587 + pic.b*0.114);       //each component of the pixel is converted into a grayscale value
+}
 
-
-    struct Image readImage(FILE *fp, int height, int width){
-        int i;
-        struct Image pic;
-        
-        pic.height = height;
-        pic.width = width;
-
-        for(i=0;i<height;i++){
-        
-            fread(pic.rgb[i],width,sizeof(struct RGB),fp);
-        }
-        return pic;
-        }
-
-    unsigned char grayscale(struct RGB rgb)
+greyscale** RGBtoGrayscale(int height,int width, rgb** pic)
+{
+    greyscale** image = (greyscale **)malloc(height * sizeof(void *));
+    for(int i = 0; i < height; i++)
     {
-        return(rgb.red*0.3 + rgb.green*0.59 + rgb.blue*0.11);
+        image[i] = (greyscale *)malloc(width * sizeof(greyscale));
     }
+    for(int i=0;i<height;i++)
+        for(int j=0;j<width;j++)
+            image[i][j].value = convert(pic[i][j]);
+    return image;     
+}
 
-    void RGBtoGrayscale(struct Image pic)
+void get_ct(color_table ct[256])
+{
+    for(int i = 0; i < 256; i++)
     {
-        int i,j;
-        for(i=0;i<pic.height;i++)
-            for(j=0;j<pic.width;j++)
-                {
-                    pic.rgb[i][j].red = pic.rgb[i][j].green = pic.rgb[i][j].blue = grayscale(pic.rgb[i][j]);
-                }
-
+        ct[i].red = i;
+        ct[i].blue = i;
+        ct[i].green = i;
+        ct[i].reserved = 0;
     }
 }
+

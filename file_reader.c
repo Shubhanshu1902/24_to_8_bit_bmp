@@ -1,41 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "include/file_reader.h"
+#include "function.h"
 
 
-struct BIT_MapHeader bitmapheader(FILE *fp)                          //to read bitmapheader of bmp
+header bitmapheader(FILE *fp)                          //to read bitmapheader of bmp
 {
-    struct BIT_MapHeader header;
-    fread(&header, sizeof(struct BIT_MapHeader), 1, fp);
-    return header;
+    header header1;
+    fread(&header1, sizeof(header), 1, fp); // something is wrong
+    return header1;
 }
 
-struct DIB_Header dibheader(FILE *fp)                                //to read dibheader of bmp
-{
-    struct DIB_Header dib_header;
-    fread(&dib_header, sizeof(struct DIB_Header), 1, fp);
+info_header dibheader(FILE *fp){                               //to read dibheader of bmp
+    info_header dib_header;
+    fread(&dib_header, sizeof(info_header), 1, fp);
     return dib_header;
 }
 
-void readimage(FILE *fp, int height, int width,struct image pic[height][width])                //to calculate rgb date
+rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                //to calculate rgb date
 {  
-    fread(pic, sizeof(struct image), height * width, fp);
+    fseek(fp,offset,SEEK_SET);
+    rgb** pic;
+    pic = (rgb**)malloc(height * sizeof(void *));
+    for(int i = 0; i < height; i++)
+    {
+        pic[i] = (rgb*)malloc(width * sizeof(rgb));
+        fread(pic[i], sizeof(rgb), width, fp);
+    }
+    return pic;
 }
 
-int open(const char *argv)
+full_image open(const char *argv)
 {
-    FILE *fp=fopen(argv,"rb");
-    /*FILE *fnew=fopen("tt.bmp","wb");
-    struct BIT_MapHeader new_bmap =bitmapheader(fp);
-    printf("%c%c\n%d\n%d\n%d",new_bmap.name[0],new_bmap.name[1],new_bmap.size,new_bmap.garbage,new_bmap.offset);
-    fwrite(&new_bmap,sizeof(struct BIT_MapHeader),1,fnew);
-    struct DIB_Header dib_new=dibheader(fp);
-    fwrite(&dib_new,sizeof(struct DIB_Header),1,fnew);
-    fseek(fp,new_bmap.offset,SEEK_SET); 
-    struct image pic[dib_new.height][dib_new.width];
-    readimage(fp,dib_new.height,dib_new.width,pic);
-    fwrite(pic,sizeof(struct pixelarray),dib_new.height*dib_new.width,fnew);
-    fclose(fnew);*/
+    FILE *fp = fopen(argv,"rb");
+    FILE *fnew = fopen("tt.bmp","wb");
+    full_image image_data;
+    image_data.bitmap = bitmapheader(fp); // problem
+    fwrite(&image_data.bitmap,sizeof(header),1,fnew);
+    image_data.dibheader=dibheader(fp);
+    fwrite(&image_data.dibheader,sizeof(info_header),1,fnew);
+    rgb** pic = readimage(fp,image_data.dibheader.height,image_data.dibheader.width,image_data.bitmap.data_offset);
+    image_data.pic = pic;
+    for(int i = 0; i <image_data.dibheader.height; i++ ){
+        fwrite(image_data.pic[i], sizeof(rgb), image_data.dibheader.width, fnew);
+    }
+    fclose(fnew);
     fclose(fp);
-    return 0;
+    return image_data;
 }
