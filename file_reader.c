@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "function.h"
+#include "header/function.h"
 
 
 header bitmapheader(FILE *fp)                          //to read bitmapheader of bmp

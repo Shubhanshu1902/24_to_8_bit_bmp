@@ -1,15 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "function.h"
-
-// struct image_data convert(header *h, info_header *ih, rgb **image)
-// {
-// 	unsigned int size = sizeof(header) + sizeof(info_header) + 256 * sizeof(color_table) + ih->width * ih->height * sizeof(greyscale);
-// 	unsigned int data_offset = size - (ih->width * ih->height * sizeof(greyscale));
-// 	convert_data(h, size, data_offset,ih);
-// 	image_data id = {converted, ct};
-// 	return id;
-// }
+#include "header/function.h"
 
 void convert_data(header *h,info_header *ih)
 {

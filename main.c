@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "function.h"
+#include "header/function.h"
 void free_data(full_image data);
 int main(int argc, char* argv[])
 {

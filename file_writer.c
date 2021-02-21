@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include "function.h"
+#include "header/function.h"
 
 void write_imagedata(FILE *img_ptr, unsigned int height, unsigned int width, greyscale** image, header* h)
 {
