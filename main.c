@@ -11,7 +11,17 @@ int main(int argc, char* argv[])
 		convert_data(&data.bitmap,&data.dibheader);
 		write_file(argv[2], data.bitmap, data.dibheader, image, ct);
 		free_data(data);
-	} else
+	}
+    else if(argc==2){      
+		color_table ct[256];
+		full_image data = open(argv[1]);
+		greyscale** image = RGBtoGrayscale(data.dibheader.height, data.dibheader.width, data.pic);
+		get_ct(ct);
+		convert_data(&data.bitmap,&data.dibheader);
+		write_file("result.bmp", data.bitmap, data.dibheader, image, ct);
+		free_data(data);
+    }
+    else
 	{
 		printf("Give 2 parameters");
 	}

@@ -3,10 +3,10 @@
 #include "header/function.h"
 
 
-header bitmapheader(FILE *fp)                          //to read bitmapheader of bmp
+header bitmapheader(FILE *fp)                           //to read bitmapheader of bmp
 {
     header header1;
-    fread(&header1, sizeof(header), 1, fp); // something is wrong
+    fread(&header1, sizeof(header), 1, fp);             // something is wrong
     return header1;
 }
 
