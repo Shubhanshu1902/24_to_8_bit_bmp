@@ -19,8 +19,10 @@ Work distribution : We had initially gathered our crude ideas on how the C Proje
 
 Shubhanshu has helped our team with the reading part of our code. Essentially the read part simply copies our bmp data onto a buffer which we have defined based on the file format.
 
+Chinthan has helped us with the main.c file and the relevant struct declarations along with the makefile.
+
 Rudransh has helped us with the writing part which essentially writes our modified 8bit bmp file onto a new user defined buffer.
 
 Tarun and Anmol have done the conversion part wherein the individual pixel data is modified as per the requirements.
 
-Chinthan has helped us with the main.c file and the relevant struct declarations along with the makefile.
+
