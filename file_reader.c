@@ -6,7 +6,7 @@
 header bitmapheader(FILE *fp)                           //to read bitmapheader of bmp
 {
     header header1;
-    fread(&header1, sizeof(header), 1, fp);             // something is wrong
+    fread(&header1, sizeof(header), 1, fp);           
     return header1;
 }
 
@@ -16,11 +16,12 @@ info_header dibheader(FILE *fp){                               //to read dibhead
     return dib_header;
 }
 
-rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                //to calculate rgb date
+rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                //to calculate rgb data
 {  
-    fseek(fp,offset,SEEK_SET);
-    rgb** pic;
-    pic = (rgb**)malloc(height * sizeof(void *));
+    fseek(fp,offset,SEEK_SET);                                      //to go to the pixel data part 
+    rgb** pic;                                                  // defining pic as 2d rgb array
+//To allocate the data to pic array and reading the data accordingly
+    pic = (rgb**)malloc(height * sizeof(void *));                 
     for(int i = 0; i < height; i++)
     {
         pic[i] = (rgb*)malloc(width * sizeof(rgb));
@@ -32,23 +33,18 @@ rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)   
 full_image open(const char *argv)
 {
     FILE *fp = fopen(argv,"rb");
+//if file is not present it will give error
     if(!fp)
     {
         printf("Wrong file name\n");
         exit(0);
     }
-    //FILE *fnew = fopen("tt.bmp","wb");
+//storing whole image data in one struct
     full_image image_data;
-    image_data.bitmap = bitmapheader(fp); // problem
-    //fwrite(&image_data.bitmap,sizeof(header),1,fnew);
+    image_data.bitmap = bitmapheader(fp); 
     image_data.dibheader=dibheader(fp);
-    //fwrite(&image_data.dibheader,sizeof(info_header),1,fnew);
     rgb** pic = readimage(fp,image_data.dibheader.height,image_data.dibheader.width,image_data.bitmap.data_offset);
     image_data.pic = pic;
-    //for(int i = 0; i <image_data.dibheader.height; i++ ){
-      //  fwrite(image_data.pic[i], sizeof(rgb), image_data.dibheader.width, fnew);
-    //}
-    //fclose(fnew);
     fclose(fp);
     return image_data;
 }
