@@ -36,9 +36,12 @@ void free_data(unsigned int height, full_image data, greyscale **image) //functi
 {
 	for (int i = 0; i < height; i++)
 	{
+		// Frees the data of each individual row
 		free(data.pic[i]);
 		free(image[i]);
 	}
+	// Frees the data of outer array
 	free(data.pic);
 	free(image);
+	// No memory leaks.
 }
