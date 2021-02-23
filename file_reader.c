@@ -32,6 +32,11 @@ rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)   
 full_image open(const char *argv)
 {
     FILE *fp = fopen(argv,"rb");
+    if(!fp)
+    {
+        printf("Wrong file name\n");
+        exit(0);
+    }
     FILE *fnew = fopen("tt.bmp","wb");
     full_image image_data;
     image_data.bitmap = bitmapheader(fp); // problem
