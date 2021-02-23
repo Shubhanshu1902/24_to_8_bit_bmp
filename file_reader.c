@@ -25,6 +25,7 @@ rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)   
 //To allocate the data to pic array and reading the data accordingly
     pic = (rgb**)malloc(height * sizeof(void *));                 
 //to read the rgb data and store it in a buffer
+}
 rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                
 {  
     fseek(fp,offset,SEEK_SET);
