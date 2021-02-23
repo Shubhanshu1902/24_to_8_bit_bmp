@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "header/function.h" //including the header file which contains the functions required for i)reading ii)converting iii)writing
 
-void free_data(full_image data); //freeing any previous data stored in the memory
+void free_data(unsigned int height, full_image data, greyscale **image); //freeing any previous data stored in the memory
 
 int main(int argc, char *argv[]) //taking arguments( i)filename {which is to be converted} ii)filename {the name of the converted file} ) from the command line and keeping a count of them
 {
@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) //taking arguments( i)filename {which is to be 
 		get_ct(ct);																				   //creating a color table of 256 bits
 		convert_data(&data.bitmap, &data.dibheader);											   //converting data of the header and dibheader of 24-bit format to 8-bit format
 		write_file(argv[2], data.bitmap, data.dibheader, image, ct);							   //file which writes into the duplicate file created whose name is as given by the user
-		free_data(data);																		   //freeing data so that the memory is free for the next conversion
+		free_data(data.dibheader.height, data, image);											   //freeing data so that the memory is free for the next conversion
 	}
 	else if (argc == 2)
 	{ //case when only the input file name is given
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) //taking arguments( i)filename {which is to be 
 		get_ct(ct);
 		convert_data(&data.bitmap, &data.dibheader);
 		write_file("result.bmp", data.bitmap, data.dibheader, image, ct); //we are giving a default name for the converted file as the user didnt input any file
-		free_data(data);
+		free_data(data.dibheader.height, data, image);
 	}
 	else //case when no file name is given
 	{
@@ -32,7 +32,13 @@ int main(int argc, char *argv[]) //taking arguments( i)filename {which is to be 
 	}
 }
 
-void free_data(full_image data) //function defined to free data
+void free_data(unsigned int height, full_image data, greyscale **image) //function defined to free data
 {
+	for (int i = 0; i < height; i++)
+	{
+		free(data.pic[i]);
+		free(image[i]);
+	}
 	free(data.pic);
+	free(image);
 }
