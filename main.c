@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "header/function.h" //including the header file which contains the functions required for i)reading ii)converting iii)writing
 
-void free_data(full_image data); //freeing any previour data stored in the memory 
+void free_data(full_image data); //freeing any previous data stored in the memory 
 
 int main(int argc, char* argv[]) //taking arguments( i)filename {which is to be converted} ii)filename {the name of the converted file} ) from the command line and keeping a count of them
 {
