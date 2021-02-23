@@ -17,15 +17,6 @@ info_header dibheader(FILE *fp){
     return dib_header;
 }
 
-
-rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                //to calculate rgb data
-{  
-    fseek(fp,offset,SEEK_SET);                                      //to go to the pixel data part 
-    rgb** pic;                                                  // defining pic as 2d rgb array
-//To allocate the data to pic array and reading the data accordingly
-    pic = (rgb**)malloc(height * sizeof(void *));                 
-//to read the rgb data and store it in a buffer
-}
 rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                
 {  
     fseek(fp,offset,SEEK_SET);
