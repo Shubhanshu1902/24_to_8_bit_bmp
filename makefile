@@ -8,4 +8,4 @@ my_project: $(all_objs)
 	$(CC) -c $(all_sources)
 
 clean:
-	rm my_project tt.bmp *.o
+	rm my_project *.o
