@@ -14,7 +14,7 @@ void convert_data(header *h,info_header *ih)
 
 unsigned char convert(rgb pic)
 {
-        return(pic.r*0.299   + pic.g*0.587 + pic.b*0.114);       //each component of the pixel is converted into a grayscale value
+        return(pic.r*0.299  + pic.g*0.587 + pic.b*0.114);       //each component of the pixel is converted into a grayscale value
 }
 
 greyscale** RGBtoGrayscale(int height,int width, rgb** pic)

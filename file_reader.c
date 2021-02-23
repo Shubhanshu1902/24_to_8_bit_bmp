@@ -37,18 +37,18 @@ full_image open(const char *argv)
         printf("Wrong file name\n");
         exit(0);
     }
-    FILE *fnew = fopen("tt.bmp","wb");
+    //FILE *fnew = fopen("tt.bmp","wb");
     full_image image_data;
     image_data.bitmap = bitmapheader(fp); // problem
-    fwrite(&image_data.bitmap,sizeof(header),1,fnew);
+    //fwrite(&image_data.bitmap,sizeof(header),1,fnew);
     image_data.dibheader=dibheader(fp);
-    fwrite(&image_data.dibheader,sizeof(info_header),1,fnew);
+    //fwrite(&image_data.dibheader,sizeof(info_header),1,fnew);
     rgb** pic = readimage(fp,image_data.dibheader.height,image_data.dibheader.width,image_data.bitmap.data_offset);
     image_data.pic = pic;
-    for(int i = 0; i <image_data.dibheader.height; i++ ){
-        fwrite(image_data.pic[i], sizeof(rgb), image_data.dibheader.width, fnew);
-    }
-    fclose(fnew);
+    //for(int i = 0; i <image_data.dibheader.height; i++ ){
+      //  fwrite(image_data.pic[i], sizeof(rgb), image_data.dibheader.width, fnew);
+    //}
+    //fclose(fnew);
     fclose(fp);
     return image_data;
 }

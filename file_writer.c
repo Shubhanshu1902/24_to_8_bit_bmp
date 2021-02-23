@@ -9,7 +9,7 @@ void write_imagedata(FILE *img_ptr, unsigned int height, unsigned int width, gre
         	fwrite(image[i], sizeof(greyscale), width, img_ptr);
 	}
 //      printf("%ld", ftell(img_ptr));
-        fseek(img_ptr, 0, SEEK_SET);
+    fseek(img_ptr, 0, SEEK_SET);
 }
 
 void write_header(FILE *img_ptr, header *h, info_header *ih)
