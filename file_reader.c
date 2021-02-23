@@ -17,14 +17,13 @@ info_header dibheader(FILE *fp){
     return dib_header;
 }
 
-<<<<<<< HEAD
+
 rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                //to calculate rgb data
 {  
     fseek(fp,offset,SEEK_SET);                                      //to go to the pixel data part 
     rgb** pic;                                                  // defining pic as 2d rgb array
 //To allocate the data to pic array and reading the data accordingly
     pic = (rgb**)malloc(height * sizeof(void *));                 
-=======
 //to read the rgb data and store it in a buffer
 rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)                
 {  
@@ -32,7 +31,7 @@ rgb** readimage(FILE *fp,unsigned int height, unsigned int width, int offset)
     rgb** pic;
     //the address of each row of the image is allocated space in memory
     pic = (rgb**)malloc(height * sizeof(void *));
->>>>>>> 01e0a5a3c6aab0ca0079ad57c7e956c7cd3555d5
+
     for(int i = 0; i < height; i++)
     {
       /*now each row address is allocated the address of the actual rgb data of the image per pixel per row
@@ -55,12 +54,7 @@ full_image open(const char *argv)
         printf("Wrong file name\n");
         exit(0);
     }
-<<<<<<< HEAD
 //storing whole image data in one struct
-=======
-    //FILE *fnew = fopen("tt.bmp","wb");
-    //access the struct 'full_image' using 'image_data'
->>>>>>> 01e0a5a3c6aab0ca0079ad57c7e956c7cd3555d5
     full_image image_data;
     image_data.bitmap = bitmapheader(fp); 
     image_data.dibheader=dibheader(fp);
