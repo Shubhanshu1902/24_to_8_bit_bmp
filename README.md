@@ -16,7 +16,7 @@ Shubhanshu has helped our team with the reading part of our code. Essentially th
 
 Chinthan has helped us with the main.c file and the relevant struct declarations.
 
-Gousepeer helped us with 
+Gousepeer helped us with make file
 
 Rudransh has helped us with the writing part which essentially writes our modified 8bit bmp file onto a new user defined buffer.
 
