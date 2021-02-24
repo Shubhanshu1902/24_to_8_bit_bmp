@@ -15,14 +15,14 @@ Gousepeer Arella      |    IMT2020042
 <p>
 We had divided our work as follows-
 
-1) Shubhanshu has helped our team with the reading part of our code. Essentially the read part simply copies our bmp data onto a buffer which we have defined based    on the file format.
+1) __*Shubhanshu*__ has helped our team with the reading part of our code. Essentially the read part simply copies our bmp data onto a buffer which we have defined based    on the file format.
 
-2) Chinthan has helped us with the main.c file and the relevant struct declarations.
+2) __*Chinthan*__ has helped us with the main.c file and the relevant struct declarations.
 
-3) Gousepeer helped us with make file
+3) __*Gousepeer*__ helped us with make file
 
-4) Rudransh has helped us with the writing part which essentially writes our modified 8bit bmp file onto a new user defined buffer.
+4) __*Rudransh*__ has helped us with the writing part which essentially writes our modified 8bit bmp file onto a new user defined buffer.
 
-5) Tarun and Anmol have done the conversion part wherein the individual pixel data is modified as per the requirements.
+5) __*Tarun*__ and __*Anmol*__ have done the conversion part wherein the individual pixel data is modified as per the requirements.
 </p>
 
