@@ -40,13 +40,13 @@ full_image open(const char *argv)
 {
     //'argv' gives us the file to be opened
     FILE *fp = fopen(argv,"rb");
-//if file is not present it will give error
+    //if file is not present it will give error
     if(!fp)
     {
         printf("Wrong file name\n");
         exit(0);
     }
-//storing whole image data in one struct
+    //storing whole image data in one struct
     full_image image_data;
     image_data.bitmap = bitmapheader(fp); 
     image_data.dibheader=dibheader(fp);
