@@ -27,9 +27,5 @@ We had divided our work as follows-
 
 4. **_Rudransh_** has helped us with the writing part which essentially writes our modified 8bit bmp file onto a new user defined buffer.
 
-<<<<<<< HEAD
-5. **_Tarun_** and **_Anmol_** have done the conversion part wherein the individual pixel data is modified as per the requirements.
-=======
 5) __*Tarun*__ and __*Anmol*__ have done the conversion part wherein the individual pixel data is modified as per the requirements and functions.h file
->>>>>>> 5ba2c5e467d60be8fcf1809aa35a4fef88a8eca3
 </p>
